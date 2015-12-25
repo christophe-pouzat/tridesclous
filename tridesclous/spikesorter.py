@@ -18,16 +18,16 @@ except ImportError:
 class SpikeSorter:
     def __init__(self, dataio = None, **kargs):
         """
-        Main class for spike sorting that encaspulate all other class in the same place:
+        Main class for spike sorting that encaspulate all the other classes in one place:
             * DataIO
             * PeakDetector
             * WaveformExtractor
             * Clustering
 
-        SpikeSorter handle the multi segment the strategy is:
-            * take care of PeakDetector one segment per segment
-            * take care of WaveformExtractor one segment per segment
-            * take care of Clustering all segment at the same time.
+        SpikeSorter multi segment handling strategy is:
+            * take care of PeakDetector on a segment per segment basis
+            * take care of WaveformExtractor on a segment per segment basis
+            * take care of Clustering all segment at once.
         
         Usage:
             spikesorter = SpikeSorter(dataio=DataIO(..))

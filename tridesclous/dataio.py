@@ -6,16 +6,16 @@ import json
 
 class DataIO:
     """
-    This class handle data for each step of spike sorting: raw data, filtered data, peaks position,
-    waveform, ....
+    This class handles data at each spike sorting step, namely: raw data, filtered data, peak positions,
+    waveforms, ....
     
-    All data are copy in a directory in several hdf5 (pandas+pytables) files so a spike sorting
-    can be continued/verifiyed later on without need to recompute all steps.
+    All data are copied in a directory in several hdf5 (pandas+pytables) files such that sorting
+    can be continued/verified anytime without having to repeat every step.
     
-    Internally the hdf5 (pytables formated) contains:
-    'info' : a Series that contains sampling_rate, nb_channels, ...
-    ''segment_0/unfiltered_signals' : non filetred signals of segment 0
-    ''segment_0/signals' : filetred signals of segment 0
+    Internally the hdf5 (pytables formatted) contains:
+    'info' : a (pandas) Series that contains sampling_rate, nb_channels, ...
+    'segment_0/unfiltered_signals' : non filetred signals of segment 0
+    'segment_0/signals' : filetred signals of segment 0
     
     Usage:
     
@@ -131,7 +131,7 @@ nb_segments: {}""".format(self.sampling_rate, self.nb_channel, self.nb_segments)
         
     def append_signals(self, signals, seg_num=0, sampling_rate = None, t_start = 0., already_hp_filtered = False, channels = None):
         """
-        Append signals segment in the store.
+        Appends one signal segment in the store.
         If the segment do not exist it is created in the store.
         Else the signals chunk is append to the previsous one.
         
